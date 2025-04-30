@@ -2,31 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Room</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Live Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div id="chat">
-        <h1>Welcome to We Love Chat</h1>
+        <h1>Live Chat Room</h1>
         <div id="messages"></div>
         <input type="text" id="message-input" placeholder="Type your message...">
         <button onclick="sendMessage()">Send</button>
     </div>
+
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
-        
-        // Display incoming messages
+        const socket = io();
+
         socket.on('message', function(msg) {
-            var messageElement = document.createElement('div');
+            const messageElement = document.createElement('div');
             messageElement.innerText = msg;
             document.getElementById('messages').appendChild(messageElement);
         });
 
-        // Send a message to the server
         function sendMessage() {
-            var message = document.getElementById('message-input').value;
+            const message = document.getElementById('message-input').value;
             socket.send(message);
             document.getElementById('message-input').value = '';
         }

@@ -1,247 +1,59 @@
-/* General Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f7f7f7;
-    color: #333;
-}
-
-/* Hero Section */
-.hero {
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
-    color: white;
-    text-align: center;
-    padding: 100px 20px;
-    animation: fadeIn 2s ease-out;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 40px;
-}
-
-.cta-button {
-    background-color: #ff3b30;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: #ff5733;
-}
-
-/* Features Section */
-.features {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #fce4ec;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    margin: 50px 0;
+    height: 100vh;
+}
+
+.container, #chat {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
     text-align: center;
 }
 
-.features h2 {
-    width: 100%;
-    font-size: 2rem;
-    margin-bottom: 40px;
+h1 {
+    color: #ff4081;
 }
 
-.feature {
-    width: 30%;
-    margin: 20px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.feature img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 20px;
-}
-
-.feature h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.feature p {
-    font-size: 1rem;
-    color: #777;
-}
-
-.feature:hover {
-    transform: translateY(-10px);
-}
-
-/* How It Works Section */
-.how-it-works {
-    background-color: #fff;
-    text-align: center;
-    padding: 50px 20px;
-}
-
-.how-it-works h2 {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-}
-
-.step {
-    margin-bottom: 30px;
-}
-
-.step h3 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
-
-.step p {
-    font-size: 1.2rem;
-    color: #555;
-}
-
-/* About Section */
-.about {
-    background-color: #fff;
-    text-align: center;
-    padding: 50px 20px;
-}
-
-.about h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.about p {
-    font-size: 1.2rem;
-    color: #555;
-}
-
-/* Testimonial Section */
-.testimonial {
-    background-color: #f7f7f7;
-    text-align: center;
-    padding: 50px 20px;
-}
-
-.testimonial blockquote {
-    font-style: italic;
-    font-size: 1.5rem;
-    color: #555;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* Footer Section */
-.footer {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: #fff;
-}
-
-.footer h3 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-.footer p {
-    font-size: 1rem;
-    color: #555;
-}
-
-.footer a {
-    color: #ff3b30;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    padding-top: 60px;
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 5% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.close {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    right: 20px;
-    top: 0;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-button[type="submit"] {
-    background-color: #ff3b30;
+a.btn, button {
+    background: #ff4081;
     color: white;
+    padding: 12px 20px;
+    text-decoration: none;
     border: none;
-    padding: 12px;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 1.1rem;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+#messages {
+    height: 300px;
+    overflow-y: auto;
+    background: #fff0f5;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+#messages div {
+    background: #ffe0e9;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#message-input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
