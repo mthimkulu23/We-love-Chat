@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Love Chat</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header>
+        <div class="hero">
+            <h1>We Love Chat</h1>
+            <p>Connect with the One Who Matters</p>
+            <button class="cta-button" onclick="scrollToFeatures()">Start Chatting Now</button>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>App Features</h2>
+        <div class="feature">
+            <img src="icons/message.svg" alt="Message Icon">
+            <h3>Instant Messaging</h3>
+            <p>Real-time chat with your loved ones, without delays.</p>
+        </div>
+        <div class="feature">
+            <img src="icons/video-call.svg" alt="Video Call Icon">
+            <h3>Voice and Video Calls</h3>
+            <p>See and hear your loved ones anytime, anywhere.</p>
+        </div>
+        <div class="feature">
+            <img src="icons/lock.svg" alt="Security Icon">
+            <h3>Private Conversations</h3>
+            <p>Safe, end-to-end encrypted messaging for peace of mind.</p>
+        </div>
+        <div class="feature">
+            <img src="icons/emojis.svg" alt="Emojis Icon">
+            <h3>Custom Emojis and Stickers</h3>
+            <p>Send personalized stickers and emojis to express yourself.</p>
+        </div>
+        <div class="feature">
+            <img src="icons/group-chat.svg" alt="Group Chat Icon">
+            <h3>Group Chats</h3>
+            <p>Create private or public group chats to connect with multiple people.</p>
+        </div>
+        <div class="feature">
+            <img src="icons/voice-message.svg" alt="Voice Message Icon">
+            <h3>Voice Messages</h3>
+            <p>Send voice messages when typing isn’t enough.</p>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="step">
+            <h3>Step 1: Sign Up</h3>
+            <p>Join by creating a free account or logging in with your existing account.</p>
+        </div>
+        <div class="step">
+            <h3>Step 2: Connect with Loved Ones</h3>
+            <p>Search for your partner or loved ones and start chatting in a secure environment.</p>
+        </div>
+        <div class="step">
+            <h3>Step 3: Share Moments</h3>
+            <p>Send photos, videos, voice messages, and have live video calls to share your moments in real-time.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About We Love Chat</h2>
+        <p>We Love Chat is designed for couples, friends, and families to stay connected. With secure, private messaging and fun, interactive features, it's more than just a chat app – it's your personal connection hub.</p>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section id="testimonial" class="testimonial">
+        <blockquote>"We Love Chat has brought us closer together even though we’re miles apart. The best chat app for couples!" - Jane & John</blockquote>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <footer class="footer">
+        <h3>Ready to start chatting?</h3>
+        <button class="cta-button" onclick="window.location.href='#'">Download Now</button>
+        <p>Available on <a href="#">App Store</a> and <a href="#">Google Play</a></p>
+    </footer>
+
+    <!-- Sign-Up/Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Login or Sign Up</h3>
+            <form id="auth-form">
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Sign Up / Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
