@@ -1,33 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Live Chat</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta charset="UTF-8" />
+  <title>We Love Chat - Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
 </head>
 <body>
-    <div id="chat">
-        <h1>Live Chat Room</h1>
-        <div id="messages"></div>
-        <input type="text" id="message-input" placeholder="Type your message...">
-        <button onclick="sendMessage()">Send</button>
+  <div class="whatsapp-container">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <img src="https://ui-avatars.com/api/?name=You" class="avatar">
+        <div class="icons">
+          <span title="Status">🟢</span>
+          <span title="New Chat">💬</span>
+          <span title="Menu">⋮</span>
+        </div>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search or start new chat" id="search-input" onkeyup="filterContacts()">
+      </div>
+      <div class="chat-list" id="chat-list">
+        <!-- Dynamic chat items will be populated here -->
+      </div>
     </div>
 
-    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-    <script>
-        const socket = io();
+    <!-- Chat Window -->
+    <div class="chat-window">
+      <div class="chat-header">
+        <img src="https://ui-avatars.com/api/?name=Alice" class="avatar" id="chat-avatar">
+        <div class="chat-user-info">
+          <div class="chat-name" id="chat-name">Alice</div>
+          <div class="chat-status" id="chat-status">Online</div>
+        </div>
+      </div>
+      <div id="messages" class="chat-body">
+        <!-- Messages will appear here -->
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="message-input" placeholder="Type a message">
+        <button onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+  </div>
 
-        socket.on('message', function(msg) {
-            const messageElement = document.createElement('div');
-            messageElement.innerText = msg;
-            document.getElementById('messages').appendChild(messageElement);
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+  <script>
+    const socket = io();
+    let username = prompt("Enter your name:");
+    const avatarURL = `https://ui-avatars.com/api/?name=${username}&background=random`;
+    let currentRecipient = null;  // Track the currently selected contact
+
+    // Load contacts dynamically from the backend
+    async function loadContacts() {
+      const response = await fetch('/contacts');
+      const contacts = await response.json();
+      const chatList = document.getElementById('chat-list');
+      
+      contacts.forEach(contact => {
+        const chatItem = document.createElement('div');
+        chatItem.classList.add('chat-item');
+        chatItem.innerHTML = `
+          <img src="https://ui-avatars.com/api/?name=${contact.name}" class="avatar">
+          <div class="chat-details">
+            <div class="chat-name">${contact.name}</div>
+            <div class="last-message">${contact.lastMessage}</div>
+          </div>
+        `;
+        chatItem.addEventListener('click', () => openChat(contact));
+        chatList.appendChild(chatItem);
+      });
+    }
+
+    // Open chat for the selected contact and load messages
+    function openChat(contact) {
+      currentRecipient = contact.name;  // Store the contact name
+      document.getElementById('chat-name').innerText = contact.name;
+      document.getElementById('chat-avatar').src = `https://ui-avatars.com/api/?name=${contact.name}&background=random`;
+      document.getElementById('chat-status').innerText = 'Online'; // You could add status logic here
+      loadMessages(contact.name);
+    }
+
+    // Load the messages for the selected contact dynamically from the backend
+    async function loadMessages(recipient) {
+      const response = await fetch('/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          sender: username,
+          recipient: recipient
+        })
+      });
+      const messages = await response.json();
+      const messagesContainer = document.getElementById('messages');
+      messagesContainer.innerHTML = ''; // Clear existing messages
+
+      messages.forEach(data => addMessage(data));
+    }
+
+    // Add a new message to the chat window
+    function addMessage(data) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+      if (data.username === username) {
+        messageElement.classList.add('self');
+      }
+      
+      messageElement.innerHTML = `
+        <div class="message-bubble">
+          <div class="name">${data.username}</div>
+          <div class="text">${data.message}</div>
+        </div>
+      `;
+      document.getElementById('messages').appendChild(messageElement);
+      document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+    }
+
+    // Handle receiving a message from the server
+    socket.on('message', function(data) {
+      addMessage(data);
+    });
+
+    // Send a message via WebSocket
+    function sendMessage() {
+      const message = document.getElementById('message-input').value;
+      if (message.trim() !== "" && currentRecipient) {
+        socket.send({
+          username: username,
+          message: message,
+          avatar: avatarURL,
+          sender: username,
+          recipient: currentRecipient
         });
+        document.getElementById('message-input').value = '';
+      }
+    }
 
-        function sendMessage() {
-            const message = document.getElementById('message-input').value;
-            socket.send(message);
-            document.getElementById('message-input').value = '';
-        }
-    </script>
+    // Initialize contacts and load existing messages
+    loadContacts();
+  </script>
 </body>
 </html>
